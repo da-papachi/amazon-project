@@ -64,16 +64,21 @@ document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
     button.addEventListener('click', () => {
 
+      CartQuantity = 0
+
+      
       let FindProduct = false
 
       cart.forEach((Product) => {
         if (button.dataset.productId === Product.productId) {
           Product.quantity++;
           FindProduct = true }
-        
+
+
+        CartQuantity+= Product.quantity
       })
 
-      if (FindProduct === false) [
+      if (FindProduct === false) {
         cart.push({
         productId: button.dataset.productId,
         productName: button.dataset.productName,
@@ -82,10 +87,11 @@ document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
         quantity: 1
       })
-      ]
+        CartQuantity++
+      }
 
+      document.querySelector('.js-cart-quantity').innerText = `${CartQuantity}`
       
-      console.log(cart)
     })
 
 });
