@@ -1,4 +1,4 @@
-
+import {cart} from '../data/cart.js'
 
 const productsGrid = document.querySelector('.js-products-grid')
 
@@ -27,7 +27,7 @@ products.forEach((Item, index) => {
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class="js-quantity-selector-${Item.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -59,6 +59,7 @@ products.forEach((Item, index) => {
   `
 })
 
+let CartQuantity = 0
 
 document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
@@ -71,25 +72,27 @@ document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
       cart.forEach((Product) => {
         if (button.dataset.productId === Product.productId) {
-          Product.quantity++;
+          Product.quantity += Number(document.querySelector(`.js-quantity-selector-${Product.productId}`).value);
           FindProduct = true }
 
-
-        CartQuantity+= Product.quantity
+ 
+        CartQuantity += Product.quantity;
       })
 
       if (FindProduct === false) {
         cart.push({
-        productId: button.dataset.productId,
-        productName: button.dataset.productName,
-        productImage: button.dataset.productImage,
-        productPrice: button.dataset.productPrice,
-
-        quantity: 1
-      })
-        CartQuantity++
+          productId: button.dataset.productId,
+          productName: button.dataset.productName,
+          productImage: button.dataset.productImage,
+          productPrice: button.dataset.productPrice,
+          
+          quantity: Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value)
+        })
+        
+        CartQuantity+= Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value);
       }
-
+      console.log(cart)
+      console.log(CartQuantity)
       document.querySelector('.js-cart-quantity').innerText = `${CartQuantity}`
       
     })

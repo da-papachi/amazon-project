@@ -1,4 +1,33 @@
 const products = [
+    {
+    id: "supersimpleid1",
+    image: "images/products/backpack.jpg",
+    name: "Very cool and stylish backpack (my favorite btw)",
+    rating: {
+      stars: 2,
+      count: 1998
+    },
+    priceCents: 1,
+    keywords: [
+      "backpack",
+      "sports",
+      "apparel"
+    ]
+  },
+  {
+    id: "supersimpleid2",
+    image: "images/products/umbrella.jpg",
+    name: "(Someone's) Umbrella",
+    rating: {
+      stars: 5,
+      count: 94839985
+    },
+    priceCents: 780459,
+    keywords: [
+      "umbrella",
+      "rain",
+    ]
+  },
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
