@@ -1,4 +1,5 @@
 
+
 const productsGrid = document.querySelector('.js-products-grid')
 
 products.forEach((Item, index) => {
@@ -47,9 +48,19 @@ products.forEach((Item, index) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart 
+          data-product-name="${Item.name}" ">
             Add to Cart
           </button>
         </div>
   `
 })
+
+
+document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
+
+    button.addEventListener('click', () => {
+        console.log('jiii')
+    })
+
+});
