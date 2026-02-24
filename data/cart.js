@@ -1,4 +1,11 @@
-export const cart = [];
+export const cart = [{
+ productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+ quantity: 2
+},
+{
+  productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+ quantity: 1
+}];
 
 export function addToCart(button) {
 
@@ -14,10 +21,7 @@ export function addToCart(button) {
 
         cart.push({
           productId: button.dataset.productId,
-          productName: button.dataset.productName,
-          productImage: button.dataset.productImage,
-          productPrice: button.dataset.productPrice,
-          
+
           quantity: Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value)
         });
         
