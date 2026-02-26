@@ -30,6 +30,10 @@ export function addToCart(button) {
     saveToStorage()
 };
 
+export function CountItems() {
+  document.querySelector('.js-return-to-home-link').innerText = `${cart.length} items`
+}
+
 export function removeFromCart(productId) {
   const newCart = []
 
@@ -42,6 +46,58 @@ export function removeFromCart(productId) {
   cart = newCart
   
   saveToStorage()
-
+  CountItems()
   document.querySelector(`.js-cart-item-container-${productId}`).remove()
 }
+
+export function updateCartItem(link, productId) {
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId) {
+      document.querySelector(`.js-cart-item-container-${productId}`).classList.add('is-editing-quantity')
+
+      link.style.display = 'none'
+      document.querySelector(`.js-quantity-input-${productId}`).style.display = 'initial'
+      document.querySelectorAll(`.js-save-quantity-link`).forEach((saveLink) => {
+        if (saveLink.dataset.productId === productId) {
+          saveLink.style.display = 'initial'
+        }
+      })
+
+      document.querySelector(`.js-quantity-input-${productId}`).value = cartItem.quantity
+
+    }
+  })
+}
+
+export function saveQuantity(productId) {
+  cart.forEach((cartItem) => {
+    let inputQuantity = document.querySelector(`.js-quantity-input-${productId}`)
+
+    if (cartItem.productId === productId && !Number.isNaN(Number(inputQuantity.value)) && Number(inputQuantity.value) > 0 && Number(inputQuantity.value) < 1000) {
+
+      cartItem.quantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value)
+      
+      document.querySelector(`.js-quantity-label-${productId}`).innerText = document.querySelector(`.js-quantity-input-${productId}`).value
+
+      document.querySelector(`.js-quantity-input-${productId}`).style.display = 'none'
+      document.querySelectorAll(`.js-save-quantity-link`).forEach((saveLink) => {
+        if (saveLink.dataset.productId === productId) {
+          saveLink.style.display = 'none'
+        }
+      })
+
+      document.querySelectorAll(`.js-update-quantity-link`).forEach((updateLink) => {
+        if (updateLink.dataset.productId === productId) {
+          updateLink.style.display = 'initial'
+        }
+      })
+
+
+      document.querySelector(`.js-cart-item-container-${productId}`).classList.remove('is-editing-quantity')
+
+      
+      saveToStorage()
+    }
+  })
+}
+

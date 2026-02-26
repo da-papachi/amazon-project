@@ -66,6 +66,7 @@ let CartQuantity = 0
 
 
 
+CountQuantity()
 
 function CountQuantity() {
   CartQuantity = 0
