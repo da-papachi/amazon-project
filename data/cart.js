@@ -34,7 +34,7 @@ export function addToCart(button) {
 
           quantity: Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value),
 
-          deliveryOptionId: 1
+          deliveryOptionId: '1'
         });
         
       };
