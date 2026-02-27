@@ -4,13 +4,8 @@ import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
 import {deliveryOptions, GetDeliveryOption} from '../../data/deliveryOptions.js'
 import {renderPaymentSummary} from '../checkout/paymentSummary.js'
-const today = dayjs();
 
-const deliveryDate = today.add(7, 'days');
-
-console.log(deliveryDate.format('dddd, MMMM D'))
-
- const cartGrid = document.querySelector(".js-order-summary");
+const cartGrid = document.querySelector(".js-order-summary");
 
 
 export function renderOrderSummary() {
