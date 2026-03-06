@@ -84,7 +84,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
     button.addEventListener('click', () => {
 
-      addToCart(button)
+      addToCart(button.dataset.productId)
       CountQuantity()
 
     })

@@ -1,42 +1,49 @@
-export let cart = JSON.parse(localStorage.getItem('cart')) || [
-
-{ productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
- quantity: 2,
- deliveryOptionId: '1'
-},
-
-{
-  productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
- quantity: 1,
- deliveryOptionId: '2'
-}
-];
+export let cart;
 
 
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart))
 }
 
-export function addToCart(button) {
+export function loadFromStorage() {
+  cart = JSON.parse(localStorage.getItem('cart')) || [
 
-   let FindProduct = false;
+  { productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+    quantity: 2,
+    deliveryOptionId: '1'
+  },
+
+  {
+   productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+   quantity: 1,
+   deliveryOptionId: '2'
+}
+];
+};
+
+export function addToCart(addedProductId) {
+   let matchingItem;
 
       cart.forEach((cartItem) => {
-        if (button.dataset.productId === cartItem.productId) { //if product exists (adds quantity)
-          cartItem.quantity += Number(document.querySelector(`.js-quantity-selector-${cartItem.productId}`).value);
-          FindProduct = true }
+        if (addedProductId === cartItem.productId) { //if product exists (adds quantity)
+          matchingItem = cartItem}
       });
 
-      if (FindProduct === false) { //if product doesnt exists, adds it to cart
+
+
+      if (!matchingItem) { //if product doesnt exists, adds it to cart
 
         cart.push({
-          productId: button.dataset.productId,
-
-          quantity: Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value),
+          productId: addedProductId,
+          quantity: 1,
+          /* quantity: Number(document.querySelector(`.js-quantity-selector-${addedProductId}`).value), */
 
           deliveryOptionId: '1'
         });
         
+      } else {
+          matchingItem.quantity++
+        /*  matchingItem.quantity += Number(document.querySelector(`.js-quantity-selector-${matchingItem.productId}`).value); */
       };
     
     saveToStorage()
