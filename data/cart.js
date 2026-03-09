@@ -21,6 +21,8 @@ export function loadFromStorage() {
 ];
 };
 
+loadFromStorage()
+
 export function addToCart(addedProductId) {
    let matchingItem;
 

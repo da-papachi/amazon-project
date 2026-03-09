@@ -71,7 +71,6 @@ CountQuantity()
 
 function CountQuantity() {
   CartQuantity = 0
-
   cart.forEach((cartItem) => {
     CartQuantity += cartItem.quantity;
   }) 
