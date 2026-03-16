@@ -8,7 +8,7 @@ describe('test suite addToCart', () => {
 
     beforeEach(() => {
        document.querySelector('.test-container').innerHTML = `<input class="js-quantity-selector-e43638ce-6aa0-4b85-b27f-e1d07eb678c6">`
-         document.querySelector('.js-quantity-selector-e43638ce-6aa0-4b85-b27f-e1d07eb678c6').value = 0
+         document.querySelector('.js-quantity-selector-e43638ce-6aa0-4b85-b27f-e1d07eb678c6').value = 1
     })
 
     afterEach(() => {
@@ -38,6 +38,7 @@ describe('test suite addToCart', () => {
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
         expect(cart.cartItems[0].quantity).toEqual(2)
+        
 
         
     });
@@ -53,10 +54,12 @@ describe('test suite addToCart', () => {
         });
         cart.loadFromStorage();
 
+        console.log(cart.cartItems)
         cart.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
         expect(cart.cartItems.length).toEqual(1)
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
-        expect(cart.cartItems[0].quantity).toEqual(0)
+        console.log(cart.cartItems)
+        expect(cart.cartItems[0].quantity).toEqual(1)
     });
 });
