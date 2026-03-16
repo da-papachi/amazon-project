@@ -719,4 +719,3 @@ export const products = [
   return new Product(productDetails); 
 });
 
-console.log(products)
