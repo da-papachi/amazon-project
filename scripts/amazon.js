@@ -1,5 +1,5 @@
 import {products} from '../data/products.js'
-import {cart, addToCart} from '../data/cart.js'
+import {cart} from '../data/cart.js'
 import { formatCurrency } from './utils/money.js'
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
 
@@ -19,14 +19,14 @@ products.forEach((Item, index) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${Item.rating.stars*10}.png">
+              src=${Item.getStarsUrl()}>
             <div class="product-rating-count link-primary">
               ${Item.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            $${formatCurrency(Item.priceCents)}
+            $${Item.getPrice()}
           </div>
 
           <div class="product-quantity-container">
@@ -71,7 +71,7 @@ CountQuantity()
 
 function CountQuantity() {
   CartQuantity = 0
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     CartQuantity += cartItem.quantity;
   }) 
   document.querySelector('.js-cart-quantity').innerText = `${CartQuantity}`
@@ -83,7 +83,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
     button.addEventListener('click', () => {
 
-      addToCart(button.dataset.productId)
+      cart.addToCart(button.dataset.productId)
       CountQuantity()
 
     })

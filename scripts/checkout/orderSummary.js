@@ -1,4 +1,4 @@
-import {cart, removeFromCart, saveQuantity, updateCartItem, CountItems, updateDeliveryOption} from "../../data/cart.js";
+import {cart} from "../../data/cart.js";
 import {products} from '../../data/products.js';
 import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
@@ -10,7 +10,7 @@ export function renderOrderSummary() {
  
   let html = ``
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
 
       const productId = cartItem.productId
 
@@ -48,7 +48,7 @@ export function renderOrderSummary() {
                     ${matchingProduct.name}
                   </div>
                   <div class="product-price">
-                    $${formatCurrency(matchingProduct.priceCents)}
+                    $${matchingProduct.getPrice()}
                   </div>
                   <div class="product-quantity  js-product-quantity-${matchingProduct.id}">
                     <span>
@@ -85,7 +85,7 @@ export function renderOrderSummary() {
 
   document.querySelector(".js-order-summary").innerHTML = html
 
-  CountItems()
+  cart.CountItems()
 
   function deliveryOptionsHTML(matchingProduct, cartItem) {
       let html = ''
@@ -127,14 +127,14 @@ export function renderOrderSummary() {
 
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener('click', () => {
-      removeFromCart(link.dataset.productId)
+      cart.removeFromCart(link.dataset.productId)
       renderPaymentSummary()
     })
   })
 
   document.querySelectorAll('.js-update-quantity-link').forEach((link) => {
     link.addEventListener('click', () => {
-      updateCartItem(link, link.dataset.productId)
+      cart.updateCartItem(link, link.dataset.productId)
     })
   })
 
@@ -142,7 +142,7 @@ export function renderOrderSummary() {
 
   document.querySelectorAll('.js-save-quantity-link').forEach((link) => {
     link.addEventListener('click', () => {
-      saveQuantity(link.dataset.productId)
+      cart.saveQuantity(link.dataset.productId)
       renderOrderSummary();
       renderPaymentSummary();
     })
@@ -152,7 +152,7 @@ export function renderOrderSummary() {
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
       const {productId, deliveryOptionId} = element.dataset
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     });

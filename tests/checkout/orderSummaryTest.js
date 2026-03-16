@@ -1,5 +1,5 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
-import { cart, loadFromStorage } from "../../data/cart.js";
+import { cart } from "../../data/cart.js";
 
 describe('test-suite: renderOrderSummary', () => {
 
@@ -33,7 +33,7 @@ describe('test-suite: renderOrderSummary', () => {
                 }
             ]);
         }); 
-        loadFromStorage()
+        cart.loadFromStorage()
 
         renderOrderSummary()
     });
@@ -66,8 +66,8 @@ describe('test-suite: renderOrderSummary', () => {
        
          expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
 
-         expect(cart.length).toEqual(1);
-         expect(cart[0].productId).toEqual(productId2)
+         expect(cart.cartItems.length).toEqual(1);
+         expect(cart.cartItems[0].productId).toEqual(productId2)
 
     });
 });

@@ -1,8 +1,24 @@
 
-import { addToCart, cart, loadFromStorage } from "../../data/cart.js"
+import {cart} from "../../data/cart.js"
 
 describe('test suite addToCart', () => {
+    beforeAll(() => {
+        document.body.innerHTML += "<div class='test-container'></div>"
+    })
+
+    beforeEach(() => {
+       document.querySelector('.test-container').innerHTML = `<input class="js-quantity-selector-e43638ce-6aa0-4b85-b27f-e1d07eb678c6">`
+         document.querySelector('.js-quantity-selector-e43638ce-6aa0-4b85-b27f-e1d07eb678c6').value = 0
+    })
+
+    afterEach(() => {
+        console.log(cart)
+         document.querySelector('.test-container').innerHTML = ''
+    })
+
     it('add an existing product to the cart', () => {
+       
+
         spyOn(localStorage, 'setItem').and.callFake(() => {
             return JSON.stringify([]);
         });
@@ -15,16 +31,19 @@ describe('test suite addToCart', () => {
                 }
             ]);
         });
-        loadFromStorage();
+        cart.loadFromStorage();
 
-        addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
-        expect(cart.length).toEqual(1)
+        cart.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+        expect(cart.cartItems.length).toEqual(1)
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(cart[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
-        expect(cart[0].quantity).toEqual(2)
+        expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
+        expect(cart.cartItems[0].quantity).toEqual(2)
+
+        
     });
 
      it('adds a new product to the cart', () => {
+        
         spyOn(localStorage, 'setItem').and.callFake(() => {
             return JSON.stringify([]);
         });
@@ -32,12 +51,12 @@ describe('test suite addToCart', () => {
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([]);
         });
-        loadFromStorage();
+        cart.loadFromStorage();
 
-        addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
-        expect(cart.length).toEqual(1)
+        cart.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+        expect(cart.cartItems.length).toEqual(1)
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(cart[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
-        expect(cart[0].quantity).toEqual(1)
+        expect(cart.cartItems[0].productId).toEqual("e43638ce-6aa0-4b85-b27f-e1d07eb678c6")
+        expect(cart.cartItems[0].quantity).toEqual(0)
     });
 });

@@ -1,4 +1,4 @@
-import {cart, removeFromCart, saveQuantity, updateCartItem, CountItems, updateDeliveryOption} from "../../data/cart.js";
+import {cart} from "../../data/cart.js";
 import {products} from '../../data/products.js';
 import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
@@ -11,7 +11,7 @@ export function renderPaymentSummary() {
     let shoppingPrice = 0;
     let taxes = 0;
 
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
         products.forEach((product) => {
             if (cartItem.productId === product.id) {
                 itemsPrice += product.priceCents * cartItem.quantity;
@@ -30,7 +30,7 @@ export function renderPaymentSummary() {
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (${cart.length}):</div>
+            <div>Items (${cart.cartItems.length}):</div>
             <div class="payment-summary-money">$${formatCurrency(itemsPrice)}</div>
           </div>
 
