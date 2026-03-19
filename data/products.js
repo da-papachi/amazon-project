@@ -81,6 +81,7 @@ object3.method1() */
 export let products = [];
 
 export function loadProducts (fun) {
+  let result;
   const xhr = new XMLHttpRequest();
 
   xhr.addEventListener('load', () => {
@@ -96,8 +97,9 @@ export function loadProducts (fun) {
       
     });
     console.log('products loaded!')
-    
+    console.log(typeof fun)
     fun();
+
   });
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
