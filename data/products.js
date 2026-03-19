@@ -78,7 +78,37 @@ object3.method2()
 
 object3.method1() */
 
-export const products = [
+export let products = [];
+
+export function loadProducts (fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } 
+      
+      else
+      {
+        return new Product(productDetails); 
+      }
+      
+    });
+    console.log('products loaded!')
+    
+    fun();
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+
+
+}
+
+loadProducts();
+
+/* export const products = [
     {
     id: "supersimpleid1",
     image: "images/products/backpack.jpg",
@@ -766,15 +796,5 @@ export const products = [
       "mens"
     ]
   }
-].map((productDetails) => {
-  if (productDetails.type === 'clothing') {
-    return new Clothing(productDetails);
-  } else
-
-  {
-    return new Product(productDetails); 
-    
-  }
-  
-});
-
+];
+ */
