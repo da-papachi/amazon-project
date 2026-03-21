@@ -97,7 +97,6 @@ export function loadProducts (fun) {
       
     });
     console.log('products loaded!')
-    console.log(typeof fun)
     fun();
 
   });
