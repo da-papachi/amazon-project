@@ -4,6 +4,8 @@ import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
 import {deliveryOptions, GetDeliveryOption} from '../../data/deliveryOptions.js'
 
+const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
 export function renderPaymentSummary() {
     let html = ``;
 
@@ -54,9 +56,48 @@ export function renderPaymentSummary() {
             <div class="payment-summary-money">$${formatCurrency(itemsPrice+shoppingPrice+taxes)}</div>
           </div>
 
-          <button class="place-order-button button-primary">
+          <button class="place-order-button button-primary js-place-order-button">
             Place your order
           </button>`;
 
     document.querySelector('.js-payment-summary').innerHTML = html;
+
+    document.querySelector('.js-place-order-button').addEventListener('click', () => {
+      makeOrder()
+    });
+
+    console.log(JSON.parse(localStorage.getItem('orders')));
 };
+
+export async function makeOrder() {
+  try {
+    const response = await fetch('https://supersimplebackend.dev/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({cart: cart.cartItems})
+
+        
+    });
+
+    const order = await response.json();
+    addOrder(order)
+    console.log(order);
+  } catch {
+    console.log('fuck')
+  }
+  
+  window.location.href = 'http://127.0.0.1:5500/orders.html'
+}
+
+
+
+function addOrder(order) {
+    orders.unshift(order);
+    saveToStorage();
+}
+
+function saveToStorage() {
+    localStorage.setItem('orders', JSON.stringify(orders));
+}
