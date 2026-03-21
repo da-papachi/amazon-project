@@ -102,6 +102,8 @@ export function loadProductsFetch() {
 
     console.log('products loaded!')
     
+  }).catch(() => {
+    console.log('oh damn')
   });
 
   return promise;
@@ -112,7 +114,7 @@ export function loadProductsFetch() {
   console.log('next step')
 }); */
 
-/* export function loadProducts (fun) {
+export function loadProducts (fun) {
   let result;
   const xhr = new XMLHttpRequest();
 
@@ -125,7 +127,7 @@ export function loadProductsFetch() {
       else
       {
         return new Product(productDetails); 
-      }
+      };
       
     });
     console.log('products loaded!')
@@ -133,13 +135,18 @@ export function loadProductsFetch() {
 
   });
 
+  xhr.addEventListener('error', () => {
+    console.log('oh damn, an error');
+  });
+
+
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 
 
 }
 
-loadProducts(); */
+loadProducts();
 
 /* export const products = [
     {
