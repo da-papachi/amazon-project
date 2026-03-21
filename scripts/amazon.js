@@ -1,9 +1,11 @@
-import {products, loadProducts} from '../data/products.js'
+import {products, loadProductsFetch} from '../data/products.js'
 import {cart} from '../data/cart.js'
 import { formatCurrency } from './utils/money.js'
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
 
-loadProducts(renderProductsGrid);
+loadProductsFetch().then(() => {
+  renderProductsGrid();
+})
 
 
 function renderProductsGrid() {

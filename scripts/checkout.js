@@ -1,4 +1,4 @@
-import { products, loadProducts } from '../data/products.js';
+import { products, s, loadProductsFetch } from '../data/products.js';
 import {renderOrderSummary} from './checkout/orderSummary.js'
 import {renderPaymentSummary} from './checkout/paymentSummary.js'
 import { cart } from '../data/cart.js';
@@ -7,12 +7,7 @@ import '../data/cart-class.js';
 
 Promise.all([
 
-    new Promise((resolve) => {
-        console.log('start promise');
-        loadProducts(() => {
-            resolve('value1');
-        })
-    }),
+    loadProductsFetch(),
 
     new Promise((resolve) => {
 
