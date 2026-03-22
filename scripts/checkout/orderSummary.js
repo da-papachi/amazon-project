@@ -134,7 +134,7 @@ export function renderOrderSummary() {
     document.querySelector(".js-order-summary").innerHTML = html
 
     document.querySelector(".js-buy-products").addEventListener('click', () => {
-        window.location.href = '../'
+        window.location.href = '/amazon-project/'
     })
 
   }
@@ -155,7 +155,7 @@ export function renderOrderSummary() {
               </button>`
 
         document.querySelector(".js-buy-products").addEventListener('click', () => {
-            window.location.href = '../'
+            window.location.href = '/amazon-project/'
         })
 
       }
