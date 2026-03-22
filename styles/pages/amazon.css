@@ -154,3 +154,24 @@
   padding: 8px;
   border-radius: 50px;
 }
+
+.products-grid .added-to-cart-message {
+  color: rgb(6, 125, 98);
+  font-size: 16px;
+
+  display: none;
+  align-items: center;
+  margin: 8px 0 8px 0;
+  
+  opacity: 1;
+}
+
+.products-grid .added-to-cart-message img {
+  height: 20px;
+  margin-right: 5px;
+}
+
+.products-grid .added-to-cart-message.is-visible {
+  opacity: 1;
+  transition: none;
+}

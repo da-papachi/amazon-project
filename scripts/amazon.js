@@ -55,6 +55,11 @@ function renderProductsGrid() {
 
             <div class="product-spacer"></div>
 
+            <div class="js-added-to-cart-message-${Item.id} added-to-cart-message" data-product-id=${Item.id}>
+                <img src="images/icons/checkmark.png">
+                Added
+            </div>
+            
             <div class="added-to-cart">
               <img src="images/icons/checkmark.png">
               Added
@@ -87,16 +92,32 @@ function renderProductsGrid() {
   }
 
 
-
   document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
 
       button.addEventListener('click', () => {
+        const addedmessage = document.querySelector(`.js-added-to-cart-message-${button.dataset.productId}`)
 
         cart.addToCart(button.dataset.productId)
         CountQuantity()
 
+       
+        addedmessage.style.display = 'flex'
+
+        if (button.hideTimeout) {
+          clearTimeout(button.hideTimeout)
+        }
+        
+
+        button.hideTimeout = setTimeout(() => {
+          addedmessage.style.display = 'none'
+        }, 2500)
+        
+     
+
       })
 
   });
+
+  
 
 };

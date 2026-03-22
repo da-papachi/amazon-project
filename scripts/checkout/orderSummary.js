@@ -10,6 +10,8 @@ export function renderOrderSummary() {
  
   let html = ``
 
+  
+
   cart.cartItems.forEach((cartItem) => {
 
       const productId = cartItem.productId
@@ -80,7 +82,7 @@ export function renderOrderSummary() {
             </div>
       `
 
-  })
+  });
 
   document.querySelector(".js-order-summary").innerHTML = html
 
@@ -124,10 +126,41 @@ export function renderOrderSummary() {
       return html
   }
 
+  if (cart.cartItems.length === 0) {
+    html = `<p>You have no orders</p> <button class="buy-products-button button-primary js-buy-products">
+            Buy some products
+          </button>`
+    
+    document.querySelector(".js-order-summary").innerHTML = html
+
+    document.querySelector(".js-buy-products").addEventListener('click', () => {
+        window.location.href = 'http://127.0.0.1:5500/amazon.html'
+    })
+
+  }
+
+ 
+
+
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener('click', () => {
       cart.removeFromCart(link.dataset.productId)
+      
       renderPaymentSummary()
+
+      if (cart.cartItems.length === 0) {
+
+        document.querySelector(".js-order-summary").innerHTML = `<p>You have no orders</p> <button class="buy-products-button button-primary js-buy-products">
+                Buy some products
+              </button>`
+
+        document.querySelector(".js-buy-products").addEventListener('click', () => {
+            window.location.href = 'http://127.0.0.1:5500/amazon.html'
+        })
+
+      }
+
+
     })
   })
 

@@ -62,9 +62,16 @@ export function renderPaymentSummary() {
 
     document.querySelector('.js-payment-summary').innerHTML = html;
 
-    document.querySelector('.js-place-order-button').addEventListener('click', () => {
-      makeOrder()
-    });
+    if (cart.cartItems.length > 0) {
+      document.querySelector('.js-place-order-button').addEventListener('click', () => {
+        makeOrder()
+      });
+    } else {
+      document.querySelector('.js-place-order-button').style.backgroundColor = 'rgb(146, 146, 146)'
+      document.querySelector('.js-place-order-button').style.borderColor = 'rgb(94, 94, 94)'
+    }
+
+    
 
     console.log(JSON.parse(localStorage.getItem('orders')));
 };
@@ -83,7 +90,11 @@ export async function makeOrder() {
 
     const order = await response.json();
     addOrder(order)
-    console.log(order);
+
+    order.products.forEach((product) => {
+      cart.removeFromCart(product.productId)
+    })
+
   } catch {
     console.log('fuck')
   }
@@ -96,7 +107,8 @@ export async function makeOrder() {
 function addOrder(order) {
     orders.unshift(order);
     saveToStorage();
-}
+};
+
 
 function saveToStorage() {
     localStorage.setItem('orders', JSON.stringify(orders));

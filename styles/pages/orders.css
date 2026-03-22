@@ -161,6 +161,16 @@
   padding: 8px;
 }
 
+.buy-products-button {
+  width: 40%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 8px;
+
+  margin-top: 11px;
+  margin-bottom: 15px;
+}
+
 @media (max-width: 800px) {
   .buy-again-button {
     margin-bottom: 10px;
