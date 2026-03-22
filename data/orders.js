@@ -73,7 +73,7 @@ export function createOrderList() {
             </div>
 
             <div class="product-actions">
-              <a href="../tracking.html?id=${product.productId}&name=${matchingProduct.name}&image=${matchingProduct.image}&quantity=${product.quantity}&date=${product.estimatedDeliveryTime}">
+              <a href="./tracking.html?id=${product.productId}&name=${matchingProduct.name}&image=${matchingProduct.image}&quantity=${product.quantity}&date=${product.estimatedDeliveryTime}">
                 <button class="track-package-button button-secondary js-track">
                   Track package
                 </button>
@@ -91,7 +91,7 @@ export function createOrderList() {
         </button>`
 
       document.querySelector(".js-buy-products").addEventListener('click', () => {
-        window.location.href = '../index.html'
+        window.location.href = './'
       })
     }
 }
@@ -104,7 +104,7 @@ async function loadPage() {
 
     document.querySelectorAll('.js-buy-again-button').forEach((againbutton) => {
     againbutton.addEventListener('click', () => {
-    window.location.href = '../index.html'
+    window.location.href = './'
   });
 });
 }
