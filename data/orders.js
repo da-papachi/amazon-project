@@ -91,7 +91,7 @@ export function createOrderList() {
         </button>`
 
       document.querySelector(".js-buy-products").addEventListener('click', () => {
-        window.location.href = 'http://127.0.0.1:5500/amazon.html'
+        window.location.href = '../tracking.html'
       })
     }
 }
@@ -104,7 +104,7 @@ async function loadPage() {
 
     document.querySelectorAll('.js-buy-again-button').forEach((againbutton) => {
     againbutton.addEventListener('click', () => {
-    window.location.href = 'http://127.0.0.1:5500/amazon.html'
+    window.location.href = '../index.html'
   });
 });
 }
