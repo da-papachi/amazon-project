@@ -73,7 +73,7 @@ export function createOrderList() {
             </div>
 
             <div class="product-actions">
-              <a href="http://127.0.0.1:5500/tracking.html?id=${product.productId}&name=${matchingProduct.name}&image=${matchingProduct.image}&quantity=${product.quantity}&date=${product.estimatedDeliveryTime}">
+              <a href="../tracking.html?id=${product.productId}&name=${matchingProduct.name}&image=${matchingProduct.image}&quantity=${product.quantity}&date=${product.estimatedDeliveryTime}">
                 <button class="track-package-button button-secondary js-track">
                   Track package
                 </button>
@@ -91,7 +91,7 @@ export function createOrderList() {
         </button>`
 
       document.querySelector(".js-buy-products").addEventListener('click', () => {
-        window.location.href = '../tracking.html'
+        window.location.href = '../index.html'
       })
     }
 }

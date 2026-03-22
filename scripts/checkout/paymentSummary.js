@@ -99,7 +99,7 @@ export async function makeOrder() {
     console.log('fuck')
   }
   
-  window.location.href = 'http://127.0.0.1:5500/orders.html'
+  window.location.href = '../../orders.html'
 }
 
 

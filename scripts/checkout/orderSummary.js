@@ -134,7 +134,7 @@ export function renderOrderSummary() {
     document.querySelector(".js-order-summary").innerHTML = html
 
     document.querySelector(".js-buy-products").addEventListener('click', () => {
-        window.location.href = 'http://127.0.0.1:5500/index.html'
+        window.location.href = '../../index.html'
     })
 
   }
@@ -155,7 +155,7 @@ export function renderOrderSummary() {
               </button>`
 
         document.querySelector(".js-buy-products").addEventListener('click', () => {
-            window.location.href = 'http://127.0.0.1:5500/index.html'
+            window.location.href = '../../index.html'
         })
 
       }
